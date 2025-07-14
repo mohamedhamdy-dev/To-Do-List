@@ -1,15 +1,23 @@
+import { createBrowserRouter, RouterProvider } from "react-router";
 import Tasks from "./Tasks/Tasks";
-import Header from "./UI/Header";
+
+import Layout from "./Layout/Layout";
+import EisenhowerMatrix from "./Eisenhower/EisenhowerMatrix";
+
+const router = createBrowserRouter([
+  {
+    path: "/",
+    Component: Layout,
+    children: [
+      { index: true, path: "/tasks", Component: Tasks },
+      { path: "/eisenhower-matrix", Component: EisenhowerMatrix },
+      { path: "/dashboard", Component: Tasks },
+    ],
+  },
+]);
 
 function App() {
-  return (
-    <div className="bg-gray-300 py-5">
-      <div className="container mx-auto space-y-5">
-        <Header />
-        <Tasks />
-      </div>
-    </div>
-  );
+  return <RouterProvider router={router} />;
 }
 
 export default App;
