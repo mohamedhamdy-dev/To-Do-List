@@ -6,8 +6,8 @@ import { NavLink } from "react-router";
 export default function Header() {
   return (
     <nav className="rounded-2xl bg-gradient-to-r from-blue-600 to-violet-600">
-      <ul className="flex items-center justify-center gap-5 px-8 py-4">
-        <li className="rounded-3xl bg-white duration-300 hover:text-violet-600">
+      <ul className="flex flex-col items-center justify-center gap-5 px-8 py-4 lg:flex-row">
+        <li className="w-80 rounded-3xl bg-white duration-300 hover:text-violet-600">
           <NavLink
             to="./tasks"
             className="flex items-center justify-center gap-2 px-5 py-2"
@@ -16,7 +16,7 @@ export default function Header() {
             <span>Tasks</span>
           </NavLink>
         </li>
-        <li className="rounded-3xl bg-white duration-300 hover:text-violet-600">
+        <li className="w-80 rounded-3xl bg-white duration-300 hover:text-violet-600">
           <NavLink
             to="./eisenhower-matrix"
             className="flex items-center justify-center gap-2 px-5 py-2"
@@ -25,7 +25,7 @@ export default function Header() {
             <span>Eisenhower Matrix</span>
           </NavLink>
         </li>
-        <li className="rounded-3xl bg-white duration-300 hover:text-violet-600">
+        <li className="w-80 rounded-3xl bg-white duration-300 hover:text-violet-600">
           <NavLink
             to="./dashboard"
             className="flex items-center justify-center gap-2 px-5 py-2"

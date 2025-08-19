@@ -1,6 +1,11 @@
-// export type TaskItemProps = {
-//   onModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
-//   onModalType: React.Dispatch<
-//     React.SetStateAction<null | "edit" | "delete" | "add">
-//   >;
-// };
+export type task = {
+  id: number;
+  descryption: string;
+  dueDate: string;
+  importance: string;
+  urgency: string;
+};
+
+export type TaskItemProps = {
+  task: task;
+};
