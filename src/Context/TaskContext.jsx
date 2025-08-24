@@ -22,6 +22,11 @@ function reducer(state, action) {
         task.id === action.id ? { ...task, ...action.payload } : task,
       );
     }
+    case "toggle": {
+      return state.map((task) =>
+        task.id === action.id ? { ...task, done: !task.done } : task,
+      );
+    }
     default:
       return state;
   }
@@ -36,7 +41,6 @@ export default function TaskProvider({ children }) {
     const id = uuidv4();
     const updatedTasks = [...parsed, { id: id, ...taskData }];
     localStorage.setItem("todoTasks", JSON.stringify(updatedTasks));
-
     dispatch({ type: "add", id: id, payload: taskData });
   }
 
@@ -58,7 +62,11 @@ export default function TaskProvider({ children }) {
     dispatch({ type: "edit", id: id, payload: updates });
   }
 
-  const value = { state, addTask, editTask, removeTask };
+  function toggleTask(id) {
+    dispatch({ type: "toggle", id });
+  }
+
+  const value = { state, addTask, editTask, removeTask, toggleTask };
 
   return <TaskContext.Provider value={value}>{children}</TaskContext.Provider>;
 }

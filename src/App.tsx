@@ -9,7 +9,7 @@ const router = createBrowserRouter([
     path: "/",
     Component: Layout,
     children: [
-      { index: true, path: "/tasks", Component: Tasks },
+      { path: "/tasks", Component: Tasks },
       { path: "/eisenhower-matrix", Component: EisenhowerMatrix },
       { path: "/dashboard", Component: Tasks },
     ],

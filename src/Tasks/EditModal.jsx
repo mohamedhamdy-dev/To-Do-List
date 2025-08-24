@@ -9,6 +9,7 @@ import { useTask } from "@/Context/TaskContext";
 
 export default function EditModal({ task }) {
   const [form, setForm] = useState({
+    done: task?.done,
     description: task?.description,
     dueDate: task?.dueDate,
     importance: task?.importance,

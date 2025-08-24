@@ -1,10 +1,11 @@
-// import { useRef, useState } from "react";
 import { FiEdit } from "react-icons/fi";
 import { IoMdCheckmark } from "react-icons/io";
 import { LuDelete } from "react-icons/lu";
 import { TiInfoLarge } from "react-icons/ti";
 import EditModal from "./EditModal";
 import DeleteModal from "./DeleteModal";
+import { motion } from "motion/react";
+import { useTask } from "../Context/TaskContext";
 
 import {
   Dialog,
@@ -19,11 +20,23 @@ export default function TaskItem({ task }) {
   const urgent = task.urgency === "urgent" ? true : false;
   const important = task.importance === "important" ? true : false;
 
+  const { toggleTask } = useTask();
+
   return (
     <>
-      <li className="flex flex-col items-center justify-between gap-5 rounded-xl bg-white p-5 shadow-xl select-none md:flex-row">
+      <motion.li
+        layout
+        className="flex flex-col items-center justify-between gap-5 rounded-xl bg-white p-5 shadow-xl select-none md:flex-row"
+      >
         <label className="inline-flex cursor-pointer items-center">
-          <input type="checkbox" className="peer sr-only" />
+          <input
+            type="checkbox"
+            checked={task.done}
+            className="peer sr-only"
+            onChange={() => {
+              toggleTask(task.id);
+            }}
+          />
           <div className="flex size-5 items-center justify-center rounded-full border-2 border-gray-400 text-transparent transition-colors peer-checked:border-green-500 peer-checked:bg-green-500 peer-checked:text-white">
             <IoMdCheckmark className="size-5" />
           </div>
@@ -98,7 +111,7 @@ export default function TaskItem({ task }) {
             </DialogContent>
           </Dialog>
         </div>
-      </li>
+      </motion.li>
     </>
   );
 }

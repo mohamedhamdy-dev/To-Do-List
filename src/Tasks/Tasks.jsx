@@ -18,17 +18,19 @@ import { HiMiniXMark } from "react-icons/hi2";
 import TaskItem from "./TaskItem";
 
 export default function Tasks() {
-  const { state: tasks } = useTask();
+  const { state } = useTask();
+  const doneTasks = state.filter((task) => task.done);
+  const toDoTasks = state.filter((task) => !task.done);
 
   return (
     <main className="rounded-2xl bg-gradient-to-r from-blue-600 to-violet-600 p-5">
       <div className="flex flex-col items-center justify-between gap-5 rounded-2xl bg-white p-5 md:flex-row xl:p-6">
         <div className="flex items-center justify-center gap-3">
-          <p>Total Tasks : 15</p>
+          <p>Total Tasks : {state.length}</p>
           <span>|</span>
-          <p>To Do: 10</p>
+          <p>To Do: {toDoTasks.length}</p>
           <span>|</span>
-          <p>Done : 5</p>
+          <p>Done : {doneTasks.length}</p>
         </div>
 
         <input
@@ -68,7 +70,7 @@ export default function Tasks() {
             </Dialog>
           </div>
           <ul className="flex flex-col gap-2 overflow-y-scroll py-5 xl:h-111 xl:gap-3 xl:p-5">
-            {tasks.map((task) => (
+            {toDoTasks.map((task) => (
               <TaskItem key={task.id} task={task} />
             ))}
           </ul>
@@ -79,7 +81,7 @@ export default function Tasks() {
             <h2>Done</h2>
           </div>
           <ul className="flex flex-col gap-2 overflow-y-scroll py-5 xl:h-111 xl:gap-3 xl:p-5">
-            {tasks.map((task) => (
+            {doneTasks.map((task) => (
               <TaskItem key={task.id} task={task} />
             ))}
           </ul>

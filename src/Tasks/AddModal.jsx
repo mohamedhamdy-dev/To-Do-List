@@ -8,6 +8,7 @@ import { DialogClose } from "@/components/ui/dialog";
 
 export default function AddModal() {
   const [form, setForm] = useState({
+    done: false,
     description: "",
     dueDate: "",
     importance: "not important",
