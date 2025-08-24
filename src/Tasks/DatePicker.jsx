@@ -9,12 +9,7 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 
-type DatePickerProps = {
-  value: Date | undefined;
-  setValue: React.Dispatch<React.SetStateAction<Date | undefined>>;
-};
-
-export default function DatePicker({ value, setValue }: DatePickerProps) {
+export default function DatePicker({ date, onDateChange }) {
   const [open, setOpen] = React.useState(false);
 
   return (
@@ -22,24 +17,25 @@ export default function DatePicker({ value, setValue }: DatePickerProps) {
       <label htmlFor="date" className="px-1 font-medium">
         Due Date
       </label>
-      <Popover open={open} onOpenChange={setOpen}>
+      <Popover open={open} onOpenChange={setOpen} modal={true}>
         <PopoverTrigger asChild>
           <Button
             variant="outline"
             id="date"
             className="w-48 cursor-pointer justify-between font-normal"
           >
-            {value ? value.toLocaleDateString() : "Select date"}
+            {date ? date : "Select date"}
             <ChevronDownIcon />
           </Button>
         </PopoverTrigger>
         <PopoverContent className="w-auto overflow-hidden p-0" align="start">
           <Calendar
             mode="single"
-            selected={value}
+            selected={date}
             captionLayout="dropdown"
             onSelect={(date) => {
-              setValue(date);
+              const stringDate = date?.toLocaleDateString();
+              onDateChange(stringDate);
               setOpen(false);
             }}
           />

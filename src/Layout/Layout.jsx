@@ -1,12 +1,15 @@
 import { Outlet } from "react-router";
 import Header from "../UI/Header";
+import TaskProvider from "@/Context/TaskContext";
 
 function Layout() {
   return (
     <div className="bg-white py-5">
       <div className="container mx-auto space-y-5">
         <Header />
-        <Outlet />
+        <TaskProvider>
+          <Outlet />
+        </TaskProvider>
       </div>
     </div>
   );

@@ -6,15 +6,8 @@ import {
   DropdownMenuRadioItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import type { Dropdown } from "./Modal.types";
 
-export default function Dropdown({
-  options,
-  label,
-  Icon,
-  value,
-  onChange,
-}: Dropdown) {
+export default function Dropdown({ options, label, Icon, value, onChange }) {
   return (
     <label className="flex flex-col gap-2 font-medium">
       <div className="flex items-center gap-2">
@@ -35,6 +28,7 @@ export default function Dropdown({
           <DropdownMenuRadioGroup value={value} onValueChange={onChange}>
             {options.map((value) => (
               <DropdownMenuRadioItem
+                key={value}
                 value={value}
                 className="cursor-pointer font-normal capitalize"
               >
