@@ -42,6 +42,7 @@ export default function Tasks() {
       </div>
 
       <div className="mt-5 flex flex-col justify-center gap-5 lg:flex-row">
+        {/* to do tasks  */}
         <div className="grow-0 basis-1/2 rounded-2xl bg-gray-50 p-4 lg:w-full xl:h-135 xl:p-6 2xl:w-auto">
           <div className="flex items-center justify-between">
             <div className="flex items-center justify-start gap-2">
@@ -75,8 +76,10 @@ export default function Tasks() {
             ))}
           </ul>
         </div>
+
+        {/* done tasks  */}
         <div className="grow-0 basis-1/2 rounded-2xl bg-white p-4 lg:w-full xl:h-135 xl:p-6 2xl:w-auto">
-          <div className="flex items-center justify-start gap-2">
+          <div className="flex h-10 items-center justify-start gap-2">
             <GrTask className="size-5" />
             <h2>Done</h2>
           </div>

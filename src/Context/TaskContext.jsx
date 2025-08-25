@@ -63,6 +63,12 @@ export default function TaskProvider({ children }) {
   }
 
   function toggleTask(id) {
+    const stored = localStorage.getItem("todoTasks");
+    const parsed = JSON.parse(stored || "[]");
+    const updatedTasks = parsed.map((task) =>
+      task.id === id ? { ...task, done: !task.done } : task,
+    );
+    localStorage.setItem("todoTasks", JSON.stringify(updatedTasks));
     dispatch({ type: "toggle", id });
   }
 

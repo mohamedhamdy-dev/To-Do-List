@@ -26,7 +26,7 @@ export default function TaskItem({ task }) {
     <>
       <motion.li
         layout
-        className="flex flex-col items-center justify-between gap-5 rounded-xl bg-white p-5 shadow-xl select-none md:flex-row"
+        className={`flex flex-col items-center justify-between gap-5 rounded-xl ${task.color} p-5 shadow-xl select-none md:flex-row`}
       >
         <label className="inline-flex cursor-pointer items-center">
           <input

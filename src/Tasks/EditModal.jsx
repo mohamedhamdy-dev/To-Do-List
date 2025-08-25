@@ -1,7 +1,6 @@
 import { useState } from "react";
 import DatePicker from "./DatePicker";
 import Dropdown from "./Dropdown";
-
 import { MdOutlineAccessTimeFilled } from "react-icons/md";
 import { FaStar } from "react-icons/fa";
 import { DialogClose } from "@/components/ui/dialog";
@@ -14,11 +13,26 @@ export default function EditModal({ task }) {
     dueDate: task?.dueDate,
     importance: task?.importance,
     urgency: task?.urgency,
+    color: task?.color,
   });
-
+  const [errors, setErrors] = useState({});
   console.log(form);
 
   const { editTask } = useTask();
+
+  function validateForm() {
+    let newErrors = {};
+
+    if (!form.description.trim()) {
+      newErrors.description = "Task description is required.";
+    }
+
+    if (!form.dueDate) {
+      newErrors.dueDate = "Due date is required.";
+    }
+
+    return newErrors;
+  }
 
   function handleChangeDescription(e) {
     setForm({ ...form, description: e.target.value });
@@ -26,6 +40,30 @@ export default function EditModal({ task }) {
 
   function handleDateChange(value) {
     setForm({ ...form, dueDate: value });
+  }
+
+  function handleChangeColor(e) {
+    setForm({ ...form, color: `bg-${e.target.id}-200` });
+  }
+
+  function handleEdit(e) {
+    const newErrors = validateForm();
+    if (Object.keys(newErrors).length > 0) {
+      e.preventDefault();
+      setErrors(newErrors);
+      return;
+    }
+
+    editTask(task.id, form);
+    setForm({
+      done: false,
+      description: "",
+      dueDate: "",
+      importance: "not important",
+      urgency: "not urgent",
+      color: "bg-yellow-200",
+    });
+    setErrors({});
   }
 
   return (
@@ -46,9 +84,22 @@ export default function EditModal({ task }) {
                 placeholder="Task Details"
                 className="h-44 w-full resize-none rounded-lg border border-gray-300 p-2 text-gray-900 placeholder-gray-400 focus:ring-2 focus:ring-green-500 focus:outline-none"
               />
+              {errors.description && !form.description && (
+                <span className="text-sm text-red-500">
+                  {errors.description}
+                </span>
+              )}
             </label>
             <div className="flex w-1/2 flex-col justify-start gap-5">
-              <DatePicker date={form.dueDate} onDateChange={handleDateChange} />
+              <div>
+                <DatePicker
+                  date={form.dueDate}
+                  onDateChange={handleDateChange}
+                />
+                {errors.dueDate && !form.dueDate && (
+                  <span className="text-sm text-red-500">{errors.dueDate}</span>
+                )}
+              </div>
               <div className="flex gap-2">
                 <Dropdown
                   key={"urgency"}
@@ -71,14 +122,49 @@ export default function EditModal({ task }) {
             </div>
           </div>
 
-          <DialogClose>
-            <div
-              onClick={() => editTask(task.id, form)}
-              className="mt-5 w-full cursor-pointer rounded-lg bg-green-600/90 px-5 py-2 font-medium text-white duration-300 hover:bg-emerald-700"
-            >
-              Edit
-            </div>
-          </DialogClose>
+          <div className="mt-5 flex items-center justify-between rounded-full">
+            <ul className="flex items-center gap-2">
+              <li
+                onClick={handleChangeColor}
+                id="yellow"
+                className={`${form.color === "bg-yellow-200" ? "border-2 border-gray-500" : ""} size-8 cursor-pointer rounded-full bg-yellow-300`}
+              ></li>
+              <li
+                onClick={handleChangeColor}
+                id="blue"
+                className={`${form.color === "bg-blue-200" ? "border-2 border-gray-500" : ""} size-8 cursor-pointer rounded-full bg-blue-300`}
+              ></li>
+              <li
+                onClick={handleChangeColor}
+                id="green"
+                className={`${form.color === "bg-green-200" ? "border-2 border-gray-500" : ""} size-8 cursor-pointer rounded-full bg-green-300`}
+              ></li>
+              <li
+                onClick={handleChangeColor}
+                id="red"
+                className={`${form.color === "bg-red-200" ? "border-2 border-gray-500" : ""} size-8 cursor-pointer rounded-full bg-red-300`}
+              ></li>
+              <li
+                onClick={handleChangeColor}
+                id="gray"
+                className={`${form.color === "bg-gray-200" ? "border-2 border-gray-500" : ""} size-8 cursor-pointer rounded-full bg-gray-300`}
+              ></li>
+              <li
+                onClick={handleChangeColor}
+                id="indigo"
+                className={`${form.color === "bg-indigo-200" ? "border-2 border-gray-500" : ""} size-8 cursor-pointer rounded-full bg-indigo-300`}
+              ></li>
+            </ul>
+
+            <DialogClose>
+              <div
+                onClick={handleEdit}
+                className="w-full cursor-pointer rounded-lg bg-green-600/90 px-5 py-2 font-medium text-white duration-300 hover:bg-emerald-700"
+              >
+                Edit
+              </div>
+            </DialogClose>
+          </div>
         </div>
       </div>
     </>
