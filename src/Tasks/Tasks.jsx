@@ -23,7 +23,9 @@ export default function Tasks() {
   const toDoTasks = state.filter((task) => !task.done);
 
   return (
-    <main className="rounded-2xl bg-gradient-to-r from-blue-600 to-violet-600 p-5">
+    // <main className="rounded-2xl bg-gradient-to-r from-blue-600 to-violet-600 p-5">
+    // <main className="rounded-2xl bg-gradient-to-r from-blue-900 to-violet-800 p-5">
+    <main className="rounded-2xl bg-gradient-to-r from-blue-900 to-violet-800 p-5">
       <div className="flex flex-col items-center justify-between gap-5 rounded-2xl bg-white p-5 md:flex-row xl:p-6">
         <div className="flex items-center justify-center gap-3">
           <p>Total Tasks : {state.length}</p>
@@ -41,9 +43,9 @@ export default function Tasks() {
         />
       </div>
 
-      <div className="mt-5 flex flex-col justify-center gap-5 lg:flex-row">
+      <div className="mt-5 flex flex-col justify-center gap-5 lg:flex-row xl:h-124">
         {/* to do tasks  */}
-        <div className="grow-0 basis-1/2 rounded-2xl bg-gray-50 p-4 lg:w-full xl:h-135 xl:p-6 2xl:w-auto">
+        <div className="grow-0 basis-1/2 rounded-2xl bg-gray-50 p-4 lg:w-full xl:p-6 2xl:w-auto">
           <div className="flex items-center justify-between">
             <div className="flex items-center justify-start gap-2">
               <GoTasklist className="size-7" />
@@ -70,7 +72,8 @@ export default function Tasks() {
               </DialogContent>
             </Dialog>
           </div>
-          <ul className="flex flex-col gap-2 overflow-y-scroll py-5 xl:h-111 xl:gap-3 xl:p-5">
+
+          <ul className="flex flex-col gap-2 overflow-y-auto py-5 xl:h-100 xl:gap-3 xl:p-5">
             {toDoTasks.map((task) => (
               <TaskItem key={task.id} task={task} />
             ))}
@@ -78,12 +81,13 @@ export default function Tasks() {
         </div>
 
         {/* done tasks  */}
-        <div className="grow-0 basis-1/2 rounded-2xl bg-white p-4 lg:w-full xl:h-135 xl:p-6 2xl:w-auto">
+        <div className="grow-0 basis-1/2 rounded-2xl bg-white p-4 lg:w-full xl:p-6 2xl:w-auto">
           <div className="flex h-10 items-center justify-start gap-2">
             <GrTask className="size-5" />
             <h2>Done</h2>
           </div>
-          <ul className="flex flex-col gap-2 overflow-y-scroll py-5 xl:h-111 xl:gap-3 xl:p-5">
+
+          <ul className="flex flex-col gap-2 overflow-y-auto py-5 xl:h-100 xl:gap-3 xl:p-5">
             {doneTasks.map((task) => (
               <TaskItem key={task.id} task={task} />
             ))}

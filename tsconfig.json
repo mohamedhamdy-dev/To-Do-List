@@ -1,0 +1,12 @@
+// tsconfig.json
+{
+  "compilerOptions": {
+    "allowJs": true,
+    "checkJs": false,
+    "jsx": "react-jsx",
+    "module": "esnext",
+    "target": "esnext",
+    "moduleResolution": "node"
+  },
+  "include": ["src"]
+}

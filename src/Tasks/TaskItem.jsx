@@ -8,6 +8,12 @@ import { motion } from "motion/react";
 import { useTask } from "../Context/TaskContext";
 
 import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
+
+import {
   Dialog,
   DialogClose,
   DialogContent,
@@ -44,11 +50,11 @@ export default function TaskItem({ task }) {
         </label>
 
         <div className="flex items-center justify-center gap-4 px-2">
-          <div className="group relative inline-block">
-            <button className="flex cursor-help items-center justify-center">
+          <Tooltip>
+            <TooltipTrigger asChild>
               <TiInfoLarge className="size-6" />
-            </button>
-            <div className="absolute top-1/2 right-full z-40 mb-2 hidden w-72 -translate-y-1/2 rounded-tl-4xl rounded-br-4xl bg-gradient-to-r from-blue-600 to-violet-600 px-4 py-2 text-center text-xs text-white opacity-0 transition-opacity group-hover:block group-hover:opacity-100">
+            </TooltipTrigger>
+            <TooltipContent>
               <div className="text-center">
                 <div className="mb-2 flex items-center justify-center gap-2">
                   {
@@ -69,8 +75,8 @@ export default function TaskItem({ task }) {
                 </div>
                 <p className="text-sm">Due : {task.dueDate}</p>
               </div>
-            </div>
-          </div>
+            </TooltipContent>
+          </Tooltip>
 
           {/* edit modal  */}
           <Dialog>
