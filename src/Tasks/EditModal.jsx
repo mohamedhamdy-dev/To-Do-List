@@ -70,10 +70,12 @@ export default function EditModal({ task }) {
     <>
       <div>
         <div className="w-full rounded-2xl bg-white p-5">
-          <div className="flex gap-10">
+          {/* <div className="flex gap-10"> */}
+          <div className="flex flex-col gap-10 sm:flex-row">
             <label
               htmlFor="descryption"
-              className="mb-1 flex w-1/2 flex-col gap-2 font-medium"
+              // className="mb-1 flex w-1/2 flex-col gap-2 font-medium"
+              className="mb-1 flex w-full flex-col gap-2 font-medium sm:w-1/2"
             >
               Task
               <textarea
@@ -159,7 +161,7 @@ export default function EditModal({ task }) {
             <DialogClose>
               <div
                 onClick={handleEdit}
-                className="w-full cursor-pointer rounded-lg bg-green-600/90 px-5 py-2 font-medium text-white duration-300 hover:bg-emerald-700"
+                className="w-full cursor-pointer rounded-lg bg-green-600/90 px-5 py-2 text-base font-medium text-white duration-300 hover:bg-emerald-700"
               >
                 Edit
               </div>

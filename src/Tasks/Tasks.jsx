@@ -23,8 +23,6 @@ export default function Tasks() {
   const toDoTasks = state.filter((task) => !task.done);
 
   return (
-    // <main className="rounded-2xl bg-gradient-to-r from-blue-600 to-violet-600 p-5">
-    // <main className="rounded-2xl bg-gradient-to-r from-blue-900 to-violet-800 p-5">
     <main className="rounded-2xl bg-gradient-to-r from-blue-900 to-violet-800 p-5">
       <div className="flex flex-col items-center justify-between gap-5 rounded-2xl bg-white p-5 md:flex-row xl:p-6">
         <div className="flex items-center justify-center gap-3">
@@ -43,7 +41,7 @@ export default function Tasks() {
         />
       </div>
 
-      <div className="mt-5 flex flex-col justify-center gap-5 lg:flex-row xl:h-124">
+      <div className="mt-5 flex flex-col justify-center gap-5 xl:h-124 xl:flex-row">
         {/* to do tasks  */}
         <div className="grow-0 basis-1/2 rounded-2xl bg-gray-50 p-4 lg:w-full xl:p-6 2xl:w-auto">
           <div className="flex items-center justify-between">

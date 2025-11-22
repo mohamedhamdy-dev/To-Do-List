@@ -2,7 +2,7 @@ import { Route, Routes, useLocation } from "react-router";
 import Tasks from "./Tasks/Tasks";
 
 import Layout from "./Layout/Layout";
-import EisenhowerMatrix from "./Eisenhower/EisenhowerMatrix";
+// import EisenhowerMatrix from "./Eisenhower/EisenhowerMatrix";
 import { AnimatePresence, motion } from "motion/react";
 import { PageTransition } from "./UI/PageTransition";
 import Dashboard from "./Dashboard/Daskboard";
@@ -14,27 +14,18 @@ function App() {
       <Routes key={location.pathname} location={location}>
         <Route element={<Layout />}>
           <Route
-            path="/"
+            index
             element={
               <PageTransition>
                 <Tasks />
               </PageTransition>
             }
           />
-
           <Route
             path="tasks"
             element={
               <PageTransition>
                 <Tasks />
-              </PageTransition>
-            }
-          />
-          <Route
-            path="eisenhower-matrix"
-            element={
-              <PageTransition>
-                <EisenhowerMatrix />
               </PageTransition>
             }
           />
