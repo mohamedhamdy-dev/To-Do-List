@@ -44,7 +44,7 @@ export default function AddModal() {
       return;
     }
 
-    addTask(form);
+    addTask({ ...form, createdAt: new Date().toISOString() });
     setForm({
       done: false,
       description: "",

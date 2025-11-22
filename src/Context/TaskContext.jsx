@@ -62,12 +62,37 @@ export default function TaskProvider({ children }) {
     dispatch({ type: "edit", id: id, payload: updates });
   }
 
+  // function toggleTask(id) {
+  //   const stored = localStorage.getItem("todoTasks");
+  //   const parsed = JSON.parse(stored || "[]");
+  //   const updatedTasks = parsed.map((task) =>
+  //     task.id === id ? { ...task, done: !task.done } : task,
+  //   );
+  //   localStorage.setItem("todoTasks", JSON.stringify(updatedTasks));
+  //   dispatch({ type: "toggle", id });
+  // }
+
   function toggleTask(id) {
     const stored = localStorage.getItem("todoTasks");
     const parsed = JSON.parse(stored || "[]");
+
+    let updatedTask = parsed.find((task) => task.id === id);
+
+    if (updatedTask.done) {
+      const { completedAt, ...rest } = updatedTask;
+      updatedTask = { ...rest, done: false };
+    } else {
+      updatedTask = {
+        ...updatedTask,
+        done: true,
+        completedAt: new Date().toISOString(),
+      };
+    }
+
     const updatedTasks = parsed.map((task) =>
-      task.id === id ? { ...task, done: !task.done } : task,
+      task.id === id ? updatedTask : task,
     );
+
     localStorage.setItem("todoTasks", JSON.stringify(updatedTasks));
     dispatch({ type: "toggle", id });
   }

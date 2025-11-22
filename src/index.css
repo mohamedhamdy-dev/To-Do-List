@@ -3,11 +3,11 @@
 
 @custom-variant dark (&:is(.dark *));
 
-/* html,
+html,
 body {
-  height: 100%;
-  overflow: hidden;
-} */
+  /* height: 100%; */
+  /* overflow: hidden; */
+}
 
 * {
   /* border: 1px red solid; */

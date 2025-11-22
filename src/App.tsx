@@ -5,6 +5,7 @@ import Layout from "./Layout/Layout";
 import EisenhowerMatrix from "./Eisenhower/EisenhowerMatrix";
 import { AnimatePresence, motion } from "motion/react";
 import { PageTransition } from "./UI/PageTransition";
+import Dashboard from "./Dashboard/Daskboard";
 
 function App() {
   const location = useLocation();
@@ -41,7 +42,7 @@ function App() {
             path="dashboard"
             element={
               <PageTransition>
-                <Tasks />
+                <Dashboard />
               </PageTransition>
             }
           />
