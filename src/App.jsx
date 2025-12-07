@@ -1,17 +1,16 @@
 import { Route, Routes, useLocation } from "react-router";
-import Tasks from "./Tasks/Tasks";
-
-import Layout from "./Layout/Layout";
 import { AnimatePresence } from "motion/react";
 import { PageTransition } from "./UI/PageTransition";
-import Analytics from "./Analytics/Analytics";
+import AppLayout from "./ui/AppLayout";
+import Tasks from "./Tasks/Tasks";
+import Analytics from "./analytics/Analytics";
 
 function App() {
   const location = useLocation();
   return (
     <AnimatePresence mode="wait">
       <Routes key={location.pathname} location={location}>
-        <Route element={<Layout />}>
+        <Route element={<AppLayout />}>
           <Route
             index
             element={

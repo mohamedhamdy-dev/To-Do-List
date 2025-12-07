@@ -1,5 +1,5 @@
 import { FiEdit } from "react-icons/fi";
-import { useTask } from "../-context/TaskContext";
+import { useTask } from "@/context/TaskContext";
 import {
   Dialog,
   DialogClose,

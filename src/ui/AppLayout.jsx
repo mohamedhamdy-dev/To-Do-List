@@ -1,8 +1,8 @@
 import { Outlet } from "react-router";
-import Header from "../UI/Header";
+import Header from "./Header";
 import TaskProvider from "@/Context/TaskContext";
 
-export default function Layout() {
+export default function AppLayout() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-[#0a0f2c] via-[#1a1f4a] to-[#3b0a50] py-6">
       <div className="container mx-auto space-y-6 px-3">

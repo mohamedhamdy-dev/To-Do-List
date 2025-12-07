@@ -13,7 +13,7 @@ import {
   CartesianGrid,
 } from "recharts";
 import { motion } from "framer-motion";
-import { useTask } from "../Context/TaskContext";
+import { useTask } from "@/context/TaskContext";
 
 export default function Analytics() {
   const { state: tasks } = useTask();

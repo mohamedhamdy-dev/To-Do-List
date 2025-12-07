@@ -2,7 +2,7 @@ import { IoMdCheckmark } from "react-icons/io";
 import { TiInfoLarge } from "react-icons/ti";
 import EditModal from "./EditModal";
 import DeleteModal from "./DeleteModal";
-import { useTask } from "../-context/TaskContext";
+import { useTask } from "@/context/TaskContext";
 import {
   Tooltip,
   TooltipContent,
