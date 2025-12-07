@@ -27,7 +27,7 @@ export default function Header() {
         {/* Dashboard */}
         <motion.li
           whileHover={{ scale: 1.05 }}
-          className={`w-64 overflow-hidden rounded-2xl border border-white/20 bg-white/10 shadow-lg backdrop-blur-xl transition-all duration-300 hover:bg-white/20 lg:w-80 ${pathname === "/dashboard" ? "border-indigo-300 bg-white/30 text-white shadow-indigo-500/50" : "text-slate-200"} `}
+          className={`w-64 overflow-hidden rounded-2xl border border-white/20 bg-white/10 shadow-lg backdrop-blur-xl transition-all duration-300 hover:bg-white/20 lg:w-80 ${pathname === "/analytics" ? "border-indigo-300 bg-white/30 text-white shadow-indigo-500/50" : "text-slate-200"} `}
         >
           <NavLink
             to="./analytics"

@@ -1,9 +1,9 @@
 import { Route, Routes, useLocation } from "react-router";
 import { AnimatePresence } from "motion/react";
-import { PageTransition } from "./UI/PageTransition";
 import AppLayout from "./ui/AppLayout";
-import Tasks from "./Tasks/Tasks";
+import Tasks from "./tasks/Tasks";
 import Analytics from "./analytics/Analytics";
+import { PageTransition } from "./ui/PageTransition";
 
 function App() {
   const location = useLocation();
