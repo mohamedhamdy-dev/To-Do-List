@@ -29,164 +29,171 @@ import {
 import { FaList } from "react-icons/fa";
 
 export default function TaskItem({ task }) {
-  const urgent = task.urgency === "urgent" ? true : false;
-  const important = task.importance === "important" ? true : false;
+  const urgent = task.urgency === "urgent";
+  const important = task.importance === "important";
 
   const { toggleTask } = useTask();
 
   return (
-    <>
-      <motion.li
-        layout
-        className={`flex items-center justify-between gap-2 rounded-xl sm:gap-5 ${task.color} flex-row p-5 shadow-xl select-none`}
-      >
-        <label className="inline-flex cursor-pointer items-center">
-          <input
-            type="checkbox"
-            checked={task.done}
-            className="peer sr-only"
-            onChange={() => {
-              toggleTask(task.id);
-            }}
-          />
-          <div className="flex size-5 items-center justify-center rounded-full border-2 border-gray-400 text-transparent transition-colors peer-checked:border-green-500 peer-checked:bg-green-500 peer-checked:text-white">
-            <IoMdCheckmark className="size-5" />
-          </div>
+    <motion.li
+      layout
+      className="flex flex-row items-center justify-between gap-2 rounded-2xl border border-white/10 bg-white/10 p-5 shadow-[0_0_18px_rgba(139,92,246,0.25)] backdrop-blur-xl transition-all duration-300 select-none sm:gap-5"
+    >
+      {/* LEFT SIDE — CHECKBOX + TEXT */}
+      <label className="inline-flex cursor-pointer items-center">
+        <input
+          type="checkbox"
+          checked={task.done}
+          className="peer sr-only"
+          onChange={() => toggleTask(task.id)}
+        />
 
-          <p className="ml-2 w-64 break-words text-gray-800 sm:w-96 md:w-64">
-            {task.description}
-          </p>
-        </label>
-
-        <div className="hidden items-center justify-center gap-4 px-2 sm:flex">
-          <Tooltip>
-            <TooltipTrigger asChild>
-              <TiInfoLarge className="size-6" />
-            </TooltipTrigger>
-            <TooltipContent>
-              <div className="text-center">
-                <div className="mb-2 flex items-center justify-center gap-2">
-                  {
-                    <span
-                      className={`rounded-full px-2 py-1 text-xs text-white capitalize ${urgent ? "bg-red-500" : "bg-green-500"} `}
-                    >
-                      {task.urgency}
-                    </span>
-                  }
-
-                  {
-                    <span
-                      className={`rounded-full px-2 py-1 text-xs text-white capitalize ${important ? "bg-yellow-500" : "bg-gray-500"} `}
-                    >
-                      {task.importance}
-                    </span>
-                  }
-                </div>
-                <p className="text-sm">Due : {task.dueDate}</p>
-              </div>
-            </TooltipContent>
-          </Tooltip>
-
-          {/* edit modal  */}
-          <Dialog>
-            <DialogTrigger>
-              <FiEdit className="size-5 cursor-pointer duration-300 hover:text-green-500" />
-            </DialogTrigger>
-            <DialogContent modalType="edit" aria-describedby={undefined}>
-              <DialogTitle>
-                <DialogClose>
-                  <h2 className="mb-4 text-xl font-bold text-white">
-                    Edit Task
-                  </h2>
-                  <div className="absolute top-3 right-3 cursor-pointer text-sm duration-300 hover:rotate-180">
-                    <HiMiniXMark className="size-7 text-white" />
-                  </div>
-                </DialogClose>
-              </DialogTitle>
-              <EditModal task={task} />
-            </DialogContent>
-          </Dialog>
-          {/* delete modal */}
-          <Dialog>
-            <DialogTrigger>
-              {/* <LuDelete className="size-5 cursor-pointer duration-300 hover:text-red-500" /> */}
-              <TfiTrash className="size-5 cursor-pointer duration-300 hover:text-red-500" />
-            </DialogTrigger>
-            <DialogContent modalType="delete" aria-describedby={undefined}>
-              <DialogTitle>
-                <DialogClose>
-                  <h2 className="mb-4 text-xl font-bold text-white">
-                    Delete Task
-                  </h2>
-                  <div className="absolute top-3 right-3 cursor-pointer text-sm duration-300 hover:rotate-180">
-                    <HiMiniXMark className="size-7 text-white" />
-                  </div>
-                </DialogClose>
-              </DialogTitle>
-              <DeleteModal id={task.id} />
-            </DialogContent>
-          </Dialog>
+        {/* Aurora Checkbox */}
+        <div className="flex size-5 items-center justify-center rounded-full border-2 border-indigo-300 text-transparent transition-colors peer-checked:border-indigo-500 peer-checked:bg-indigo-600 peer-checked:text-white">
+          <IoMdCheckmark className="size-5" />
         </div>
-        <MobileOptions task={task} />
-      </motion.li>
-    </>
+
+        {/* Task Text */}
+        <p className="ml-3 w-64 break-words text-white/90 sm:w-96 md:w-64">
+          {task.description}
+        </p>
+      </label>
+
+      {/* DESKTOP OPTIONS */}
+      <div className="hidden items-center justify-center gap-4 px-2 sm:flex">
+        {/* INFO */}
+        <Tooltip>
+          <TooltipTrigger asChild>
+            <TiInfoLarge className="size-6 text-indigo-300 duration-300 hover:text-indigo-400" />
+          </TooltipTrigger>
+          <TooltipContent className="rounded-xl border border-white/10 bg-black/80 text-white shadow-xl backdrop-blur-lg">
+            <div className="space-y-2 text-center">
+              <div className="flex items-center justify-center gap-2">
+                <span
+                  className={`rounded-full px-2 py-1 text-xs text-white capitalize ${urgent ? "bg-red-500" : "bg-green-600"} `}
+                >
+                  {task.urgency}
+                </span>
+
+                <span
+                  className={`rounded-full px-2 py-1 text-xs text-white capitalize ${important ? "bg-yellow-500" : "bg-gray-500"} `}
+                >
+                  {task.importance}
+                </span>
+              </div>
+              <p className="text-sm text-indigo-200">Due: {task.dueDate}</p>
+            </div>
+          </TooltipContent>
+        </Tooltip>
+
+        {/* EDIT MODAL */}
+        <Dialog>
+          <DialogTrigger>
+            <FiEdit className="size-5 cursor-pointer text-indigo-300 duration-300 hover:text-green-400" />
+          </DialogTrigger>
+
+          <DialogContent
+            aria-describedby={undefined}
+            className="border border-white/20 bg-gradient-to-br from-slate-800 to-indigo-900"
+          >
+            <DialogTitle>
+              <DialogClose>
+                <h2 className="mb-4 text-xl font-bold text-white">Edit Task</h2>
+                <div className="absolute top-3 right-3 cursor-pointer duration-300 hover:rotate-180">
+                  <HiMiniXMark className="size-7 text-white" />
+                </div>
+              </DialogClose>
+            </DialogTitle>
+
+            <EditModal task={task} />
+          </DialogContent>
+        </Dialog>
+
+        {/* DELETE MODAL */}
+        <Dialog>
+          <DialogTrigger>
+            <TfiTrash className="size-5 cursor-pointer text-indigo-300 duration-300 hover:text-red-500" />
+          </DialogTrigger>
+
+          <DialogContent
+            aria-describedby={undefined}
+            className="border border-white/20 bg-gradient-to-br from-slate-800 to-indigo-900"
+          >
+            <DialogTitle>
+              <DialogClose>
+                <h2 className="mb-4 text-xl font-bold text-white">
+                  Delete Task
+                </h2>
+                <div className="absolute top-3 right-3 cursor-pointer duration-300 hover:rotate-180">
+                  <HiMiniXMark className="size-7 text-white" />
+                </div>
+              </DialogClose>
+            </DialogTitle>
+
+            <DeleteModal id={task.id} />
+          </DialogContent>
+        </Dialog>
+      </div>
+
+      {/* MOBILE OPTIONS */}
+      <MobileOptions task={task} />
+    </motion.li>
   );
 }
 
 function MobileOptions({ task }) {
-  const urgent = task.urgency === "urgent" ? true : false;
-  const important = task.importance === "important" ? true : false;
+  const urgent = task.urgency === "urgent";
+  const important = task.importance === "important";
 
   return (
     <div className="flex items-center justify-center sm:hidden">
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
-          <div className="text- rounded-full bg-white p-2 text-indigo-500">
+          <div className="rounded-full bg-indigo-500 p-2 text-white shadow-lg">
             <FaList className="size-4" />
           </div>
         </DropdownMenuTrigger>
 
-        {/* <DropdownMenuContent className="w-40 rounded-2xl bg-white p-2"> */}
-        {/* <DropdownMenuContent className="mt-2 flex w-36 flex-col gap-2 rounded-2xl bg-white p-2"> */}
         <DropdownMenuContent
           align="end"
-          className="mt-2 flex w-36 flex-col gap-2 rounded-2xl bg-white p-2"
+          className="mt-2 flex w-36 flex-col gap-2 rounded-2xl border border-white/10 bg-white/10 p-3 text-white shadow-[0_0_18px_rgba(139,92,246,0.35)] backdrop-blur-xl"
         >
-          {/* INFO BUTTON */}
-
+          {/* INFO */}
           <Dialog>
             <DialogTrigger asChild>
-              <button className="flex w-full items-center gap-2 text-left text-blue-600">
+              <button className="flex w-full items-center gap-2 text-left hover:text-indigo-300">
                 <TiInfoLarge className="size-5" />
                 View Info
               </button>
             </DialogTrigger>
 
             <DialogContent>
-              <DialogTitle>Task Info</DialogTitle>
-              <div className="text-center">
-                <div className="mb-2 flex items-center justify-center gap-2">
+              <DialogTitle className="text-white">Task Info</DialogTitle>
+
+              <div className="space-y-2 text-center">
+                <div className="flex items-center justify-center gap-2">
                   <span
-                    className={`rounded-full px-2 py-1 text-xs text-white capitalize ${urgent ? "bg-red-500" : "bg-green-500"}`}
+                    className={`rounded-full px-2 py-1 text-xs text-white ${urgent ? "bg-red-500" : "bg-green-600"} `}
                   >
                     {task.urgency}
                   </span>
+
                   <span
-                    className={`rounded-full px-2 py-1 text-xs text-white capitalize ${important ? "bg-yellow-500" : "bg-gray-500"}`}
+                    className={`rounded-full px-2 py-1 text-xs text-white ${important ? "bg-yellow-500" : "bg-gray-500"} `}
                   >
                     {task.importance}
                   </span>
                 </div>
+
                 <p className="text-sm">Due: {task.dueDate}</p>
               </div>
             </DialogContent>
           </Dialog>
 
-          {/* EDIT BUTTON */}
-
+          {/* EDIT */}
           <Dialog>
             <DialogTrigger asChild>
-              <button className="flex w-full items-center gap-2 text-left text-green-600">
+              <button className="flex w-full items-center gap-2 text-left hover:text-green-400">
                 <FiEdit className="size-5" />
                 Edit Task
               </button>
@@ -199,17 +206,16 @@ function MobileOptions({ task }) {
             </DialogContent>
           </Dialog>
 
-          {/* DELETE BUTTON */}
-
+          {/* DELETE */}
           <Dialog>
             <DialogTrigger asChild>
-              <button className="flex w-full items-center gap-2 text-left text-red-600">
-                <TfiTrash className="size-5 cursor-pointer duration-300 hover:text-red-500" />
+              <button className="flex w-full items-center gap-2 text-left hover:text-red-500">
+                <TfiTrash className="size-5" />
                 Delete Task
               </button>
             </DialogTrigger>
 
-            <DialogContent modalType="delete">
+            <DialogContent>
               <DialogTitle>Delete Task</DialogTitle>
               <DialogClose />
               <DeleteModal id={task.id} />

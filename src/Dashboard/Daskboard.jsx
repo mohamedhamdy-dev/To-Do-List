@@ -11,6 +11,7 @@ import {
   Legend,
   Bar,
 } from "recharts";
+import { motion } from "framer-motion";
 import { useTask } from "../Context/TaskContext";
 
 export default function Dashboard() {
@@ -23,13 +24,11 @@ export default function Dashboard() {
     overdue,
     createdThisWeek,
     importanceUrgencyData,
-
     completionRate,
   } = useMemo(() => {
     const total = tasks.length;
 
     const completed = tasks.filter((t) => t.done).length;
-
     const pending = tasks.filter((t) => !t.done).length;
 
     const overdue = tasks.filter((t) => {
@@ -56,14 +55,6 @@ export default function Dashboard() {
       ([category, count]) => ({ category, count }),
     );
 
-    const monthMap = {};
-    tasks.forEach((t) => {
-      const month = new Date(t.createdAt).toLocaleString("default", {
-        month: "short",
-      });
-      monthMap[month] = (monthMap[month] || 0) + 1;
-    });
-
     const completionRate =
       total === 0 ? 0 : Math.round((completed / total) * 100);
 
@@ -74,14 +65,18 @@ export default function Dashboard() {
       overdue,
       createdThisWeek,
       importanceUrgencyData,
-
       completionRate,
     };
   }, [tasks]);
 
   return (
-    <main className="h-auto space-y-6 rounded-2xl bg-gradient-to-r from-blue-900 to-violet-800 p-5 p-6">
-      <h1 className="text-3xl font-bold text-white">Statistics</h1>
+    <main className="space-y-4 rounded-2xl bg-gradient-to-br from-slate-900 via-indigo-900 to-violet-900 p-4 text-slate-100 shadow-xl">
+      {/* Title */}
+      <h1 className="bg-gradient-to-r from-indigo-300 to-violet-300 bg-clip-text text-4xl font-extrabold text-transparent">
+        Statistics
+      </h1>
+
+      {/* Stats Grid */}
 
       <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
         <StatCard label="Total Tasks" value={total} />
@@ -92,9 +87,14 @@ export default function Dashboard() {
         <StatCard label="Completion Rate (%)" value={`${completionRate}%`} />
       </div>
 
-      <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
-        <div className="rounded-xl bg-white p-4 shadow">
-          <h2 className="mb-4 text-xl font-semibold">Completion Overview</h2>
+      {/* Charts */}
+      <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
+        {/* Completion Overview */}
+
+        <div className="rounded-xl border border-white/20 bg-white/10 p-4 shadow-lg backdrop-blur-md">
+          <h2 className="mb-4 text-xl font-semibold text-indigo-200">
+            Completion Overview
+          </h2>
           <ResponsiveContainer width="100%" height={260}>
             <PieChart>
               <Pie
@@ -115,15 +115,19 @@ export default function Dashboard() {
           </ResponsiveContainer>
         </div>
 
-        <div className="rounded-xl bg-white p-4 shadow">
-          <h2 className="mb-4 text-xl font-semibold">Importance × Urgency</h2>
+        {/* Importance x Urgency */}
+
+        <div className="rounded-xl border border-white/20 bg-white/10 p-4 shadow-lg backdrop-blur-md">
+          <h2 className="mb-4 text-xl font-semibold text-indigo-200">
+            Importance × Urgency
+          </h2>
           <ResponsiveContainer width="100%" height={260}>
             <BarChart data={importanceUrgencyData}>
-              <XAxis dataKey="category" />
-              <YAxis />
+              <XAxis dataKey="category" stroke="#c7d2fe" />
+              <YAxis stroke="#c7d2fe" />
               <Tooltip />
               <Legend />
-              <Bar dataKey="count" fill="#60a5fa" />
+              <Bar dataKey="count" fill="#a78bfa" />
             </BarChart>
           </ResponsiveContainer>
         </div>
@@ -132,11 +136,18 @@ export default function Dashboard() {
   );
 }
 
+/* -------------------- Stat Card -------------------- */
+
 function StatCard({ label, value }) {
   return (
-    <div className="flex flex-col rounded-xl bg-white p-4 shadow">
-      <span className="text-sm text-gray-500">{label}</span>
-      <span className="text-2xl font-bold">{value}</span>
-    </div>
+    <motion.div
+      initial={{ opacity: 0, y: 12 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.4 }}
+      className="flex transform flex-col rounded-xl border border-white/20 bg-white/10 p-5 shadow-lg backdrop-blur-md transition hover:scale-[1.02] hover:shadow-indigo-500/30"
+    >
+      <span className="text-sm text-indigo-200">{label}</span>
+      <span className="text-3xl font-bold text-white">{value}</span>
+    </motion.div>
   );
 }

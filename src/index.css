@@ -3,16 +3,6 @@
 
 @custom-variant dark (&:is(.dark *));
 
-html,
-body {
-  /* height: 100%; */
-  /* overflow: hidden; */
-}
-
-* {
-  /* border: 1px red solid; */
-}
-
 /* /////////////// scroll bar /////////////////////// */
 
 /* Apply to all scrollable elements */
