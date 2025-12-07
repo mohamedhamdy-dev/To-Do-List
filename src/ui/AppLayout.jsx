@@ -1,6 +1,6 @@
 import { Outlet } from "react-router";
 import Header from "./Header";
-import TaskProvider from "@/Context/TaskContext";
+import TaskProvider from "@/context/TaskContext";
 
 export default function AppLayout() {
   return (
