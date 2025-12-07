@@ -10,11 +10,12 @@ import {
   YAxis,
   Legend,
   Bar,
+  CartesianGrid,
 } from "recharts";
 import { motion } from "framer-motion";
 import { useTask } from "../Context/TaskContext";
 
-export default function Dashboard() {
+export default function Analytics() {
   const { state: tasks } = useTask();
 
   const {
@@ -70,8 +71,7 @@ export default function Dashboard() {
   }, [tasks]);
 
   return (
-    <main className="space-y-4 rounded-2xl bg-gradient-to-br from-slate-900 via-indigo-900 to-violet-900 p-4 text-slate-100 shadow-xl">
-      {/* Title */}
+    <main className="space-y-4 rounded-3xl bg-gradient-to-br from-slate-900 via-indigo-900 to-violet-900 p-4 text-slate-100 shadow-xl sm:rounded-2xl">
       <h1 className="bg-gradient-to-r from-indigo-300 to-violet-300 bg-clip-text text-4xl font-extrabold text-transparent">
         Statistics
       </h1>
@@ -95,6 +95,7 @@ export default function Dashboard() {
           <h2 className="mb-4 text-xl font-semibold text-indigo-200">
             Completion Overview
           </h2>
+
           <ResponsiveContainer width="100%" height={260}>
             <PieChart>
               <Pie
@@ -107,8 +108,8 @@ export default function Dashboard() {
                 outerRadius={90}
                 label
               >
-                <Cell fill="#4ade80" />
-                <Cell fill="#f87171" />
+                <Cell fill="#38bdf8" />
+                <Cell fill="#818cf8" />
               </Pie>
               <Tooltip />
             </PieChart>
@@ -121,13 +122,60 @@ export default function Dashboard() {
           <h2 className="mb-4 text-xl font-semibold text-indigo-200">
             Importance × Urgency
           </h2>
+
           <ResponsiveContainer width="100%" height={260}>
             <BarChart data={importanceUrgencyData}>
-              <XAxis dataKey="category" stroke="#c7d2fe" />
-              <YAxis stroke="#c7d2fe" />
-              <Tooltip />
-              <Legend />
-              <Bar dataKey="count" fill="#a78bfa" />
+              {/* Aurora Gradient Fill */}
+              <defs>
+                <linearGradient id="auroraGradient" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stopColor="#5eead4" stopOpacity={0.9} />{" "}
+                  {/* Aqua */}
+                  <stop
+                    offset="100%"
+                    stopColor="#a78bfa"
+                    stopOpacity={0.9}
+                  />{" "}
+                  {/* Violet */}
+                </linearGradient>
+              </defs>
+
+              <CartesianGrid stroke="rgba(255,255,255,0.1)" vertical={false} />
+
+              <XAxis
+                dataKey="category"
+                stroke="#dbeafe"
+                tick={{ fill: "#e0e7ff", fontSize: 13 }}
+                tickLine={false}
+                axisLine={{ stroke: "#6366f1" }}
+              />
+
+              <YAxis
+                stroke="#dbeafe"
+                tick={{ fill: "#e0e7ff", fontSize: 13 }}
+                tickLine={false}
+                axisLine={{ stroke: "#6366f1" }}
+              />
+
+              <Tooltip
+                contentStyle={{
+                  background:
+                    "linear-gradient(135deg, rgba(94,234,212,0.15), rgba(167,139,250,0.15))",
+                  border: "1px solid rgba(255,255,255,0.15)",
+                  backdropFilter: "blur(10px)",
+                  borderRadius: "12px",
+                  color: "white",
+                }}
+              />
+
+              <Legend wrapperStyle={{ color: "#e0e7ff" }} />
+
+              <Bar
+                dataKey="count"
+                fill="url(#auroraGradient)"
+                radius={[10, 10, 4, 4]} // Rounded top edges
+                barSize={40}
+                activeBar={false}
+              />
             </BarChart>
           </ResponsiveContainer>
         </div>

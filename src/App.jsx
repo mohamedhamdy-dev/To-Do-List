@@ -4,7 +4,7 @@ import Tasks from "./Tasks/Tasks";
 import Layout from "./Layout/Layout";
 import { AnimatePresence } from "motion/react";
 import { PageTransition } from "./UI/PageTransition";
-import Dashboard from "./Dashboard/Daskboard";
+import Analytics from "./Analytics/Analytics";
 
 function App() {
   const location = useLocation();
@@ -29,10 +29,10 @@ function App() {
             }
           />
           <Route
-            path="dashboard"
+            path="analytics"
             element={
               <PageTransition>
-                <Dashboard />
+                <Analytics />
               </PageTransition>
             }
           />
