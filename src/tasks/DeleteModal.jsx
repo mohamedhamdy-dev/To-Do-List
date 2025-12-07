@@ -1,6 +1,6 @@
 import { FiAlertTriangle } from "react-icons/fi";
 import { DialogClose } from "@radix-ui/react-dialog";
-import { useTask } from "@/Context/TaskContext";
+import { useTask } from "@/context/TaskContext";
 import { TfiTrash } from "react-icons/tfi";
 import {
   Dialog,

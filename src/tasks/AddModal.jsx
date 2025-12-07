@@ -3,7 +3,7 @@ import { MdOutlineAccessTimeFilled } from "react-icons/md";
 import { FaStar } from "react-icons/fa";
 import DatePicker from "./DatePicker";
 import Dropdown from "./Dropdown";
-import { useTask } from "@/Context/TaskContext";
+import { useTask } from "@/context/TaskContext";
 import { DialogClose } from "@/components/ui/dialog";
 import { BiAddToQueue } from "react-icons/bi";
 import {

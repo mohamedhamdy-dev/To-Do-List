@@ -1,7 +1,7 @@
 import { GoTasklist } from "react-icons/go";
 import { GrTask } from "react-icons/gr";
 import AddModal from "./AddModal";
-import { useTask } from "@/Context/TaskContext";
+import { useTask } from "@/context/TaskContext";
 import TaskItem from "./TaskItem";
 import { motion } from "framer-motion";
 import { useState } from "react";
